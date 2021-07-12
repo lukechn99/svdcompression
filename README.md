@@ -6,19 +6,19 @@ Single value decomposition yields decompositions of varying sizes based on the o
 Not all files will have a number of bits that fit the optimal matrix dimensions, so we will have to trim the beginning and/or the end and store those trimmings as smaller chunks of data. Whether or not those smaller chunks should also be compressed with SVD is up for investigation as SVD is not necessarily guaranteed to make them smaller if they are already small.  
 Data from files will be converted as follows:  
 ```
-                                         /-----------------------------------------------------------|--------------|--------------|--------------|--------------\
+                                         ,-----------------------------------------------------------,--------------,--------------,--------------,--------------.
                                          | byte offset to next file (32 bits)                        | bit offset   | pre-trim     | len. sigma   | post-trim    |
                                          |                                                           | to next file | (8 bits)     | (8 bits)     | (8 bits)     |
                                          |                                                           | (8 bits)     |              |              |              |
-                                         |-----------------------------------------------------------|--------------|--------------|--------------|--------------|
-.-------------------.                    | row U (32 bits)                                           | col U (32 bits)                                           |  
+                                         |-----------------------------------------------------------|--------------'--------------'--------------'--------------|
+,-------------------.                    | row U (32 bits)                                           | col U (32 bits)                                           |  
 | uncompressed file | == "compress" ==>  |-----------------------------------------------------------|-----------------------------------------------------------|
 '-------------------'                    | row V  (32 bits)                                          | col V (32 bits)                                           |
-                                         |-----------------------------------------------------------|-----------------------------------------------------------|
+                                         |-----------------------------------------------------------'-----------------------------------------------------------|
                                          |                                                                                                                       |
                                          | Data                                                                                                                  |
                                          |                                                                                                                       |
-                                         \-----------------------------------------------------------------------------------------------------------------------/
+                                         '-----------------------------------------------------------------------------------------------------------------------'
 ```
 Byte offset to next file will be 32 bits to encompass file sizes of decompressed size up to 1 gigabyte. This is accompanied by 8 bits of offset for offsets that are not in whole bytes.  
 Pre-trim and post-trim do not have to be very long, but I'm not sure how long they should be yet. Most numbers can fit around a rectangle with little excess.  
