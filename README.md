@@ -1,5 +1,5 @@
 # svdcompression
-Uses SVD matrix decomposition to create compressed media
+Loss-less compression today use redundancy reducing algorithms like LZ adaptive dictionary-based algorithm to catalog repetitive terms. SVD compression is a loss-less way of compression using SVD matrix decomposition and optimization methods to create compressed media. 
 
 ### how it works
 Single value decomposition yields decompositions of varying sizes based on the original matrix. Since there is no single way of organizing a bit-string of data into a two dimensional array, we can optimize the array to either 1). minimize the number of eigenvalues or 2). maximize the multiplicity of 0's by organizing the data into a singular matrix. In doing this, the reduced decomposition will be of minimal size. Note that minimizing the number of eigenvalues will most likely require a larger domain or co-domain which might not be conducive to a smaller compressed size, so we will prioritize maximizing the multiplicity of 0's so that the decomposition is smaller and easier to store.  
