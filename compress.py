@@ -48,6 +48,11 @@ def compressImg(filename):
 
 
 def compressTxt(filename):
+    # convert file to bits using standard format
+
+    # figure out row length to maximize multiplicity of 0s
+    
+    # run svd on the output
     pass
 
 
