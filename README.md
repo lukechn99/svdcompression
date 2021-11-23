@@ -8,6 +8,9 @@ Depending on the media, current methods can compress data anywhere from 46-86% o
 Single value decomposition yields decompositions of varying sizes based on the original matrix. Since there is no single way of organizing a bit-string of data into a two dimensional array, we can optimize the array to either 1). minimize the number of eigenvalues or 2). maximize the multiplicity of 0's by organizing the data into a singular matrix. In doing this, the reduced decomposition will be of minimal size. Note that minimizing the number of eigenvalues will most likely require a larger domain or co-domain which might not be conducive to a smaller compressed size, so we will prioritize maximizing the multiplicity of 0's so that the decomposition is smaller and easier to store.  
   
 Not all files will have a number of bits that fit the optimal matrix dimensions, so we will have to trim the beginning and/or the end and store those trimmings as smaller chunks of data. Whether or not those smaller chunks should also be compressed with SVD is up for investigation as SVD is not necessarily guaranteed to make them smaller if they are already small. Another idea is that instead of trimming data, we can just append 0's onto the beginning and end of the matrix and record how many 0's were appended using the pre-trim and post-trim sections in the header.   
+
+(an interesting idea is to track the median of the input stream and then subtract that so that our matrix has many 0s)
+
 Data from files will be converted as follows:  
 ```
                                          ,-----------------------------------------------------------,--------------,--------------,--------------,--------------.
